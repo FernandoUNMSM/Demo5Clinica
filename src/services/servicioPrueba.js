@@ -6,16 +6,32 @@ Parse.initialize(
   '09rHQT162eNw4fLLUjoT2e7lvpabM8r885YvinpT' // This is your Javascript key
 );
 
-export default async function servicioPrueba() {
-  // async () => {
-    const myNewObject = new Parse.Object('records');
-    myNewObject.set('where', { foo: 'bar' });
-    try {
-      const result = await myNewObject.save();
+export async function servicioPrueba(json) {
+  const myNewObject = new Parse.Object('citas');
+  myNewObject.set('where', json);
+  try {
+    const result = await myNewObject.save();
+    // Access the Parse Object attributes using the .GET method
+    console.log('records created', result);
+  } catch (error) {
+    console.error('Error while creating records: ', error);
+  }
+}
+
+export async function obtenerCitas() {
+  const query = new Parse.Query('citas');
+  // You can also query by using a parameter of an object
+  // query.equalTo('objectId', 'xKue915KBG');
+  const results = await query.find();
+  const citas = []
+  try {
+    for (const object of results) {
       // Access the Parse Object attributes using the .GET method
-      console.log('records created', result);
-    } catch (error) {
-      console.error('Error while creating records: ', error);
+      const res = object.get('where');
+      citas.push(res)
     }
-  // }
+    return citas;
+  } catch (error) {
+    console.error('Error while fetching MyCustomClassName', error);
+  }
 }
