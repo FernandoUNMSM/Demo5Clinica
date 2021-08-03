@@ -24,8 +24,8 @@ const loginBack = async function ({formData}) {
         const currentUser = await Parse.User.currentAsync();
         console.log(currentUser)
         let path = ""
-        const nombre = currentUser.attributes.Nombre;
-        const apellido = currentUser.attributes.Apellido;
+        const nombre = currentUser.attributes.nombre;
+        const apellido = currentUser.attributes.apellido;
         const usuario = currentUser.attributes.usuario;
         const email = currentUser.attributes.email;
         const tipoUsuario = currentUser.attributes.tipoUsuario;
