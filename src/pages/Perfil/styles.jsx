@@ -9,7 +9,7 @@ export const TablesContainer = styled.div`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: 1fr;
   align-items: center;
   justify-items: center;
 
@@ -18,7 +18,7 @@ export const TablesContainer = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 40vh;
+    /* height: 40vh; */
     overflow: auto;
     width: 80%;
   }
