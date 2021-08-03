@@ -9,18 +9,12 @@ Parse.initialize(
 
 
 const loginBack = async function ({formData}) {
-    // Note that this values come from state variables that we've declared before
+    
 
     const usernameValue = formData.get("username");
     const passwordValue = formData.get("password");
     return await Parse.User.logIn(usernameValue, passwordValue)
       .then(async (loggedInUser) => {
-        // logIn returns the corresponding ParseUser object
-        // To verify that this is in fact the current user, currentAsync can be used
-        //const currentUser = await Parse.User.currentAsync();
-        //console.log(loggedInUser === currentUser);
-        // Navigation.navigate takes the user to the screen named after the one
-        // passed as parameter
         const currentUser = await Parse.User.currentAsync();
         let path = ""
         const nombre = currentUser.attributes.nombre;
