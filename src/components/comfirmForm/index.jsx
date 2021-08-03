@@ -1,17 +1,18 @@
 import React from 'react'
 import createCita from 'services/createCita'
+import servicioPrueba from 'services/servicioPrueba'
 
 export default function Comfirm ({especialidad, horario, turno, doctor}){
   const enviarForm = () => {
     const iduser = JSON.parse(sessionStorage.getItem('usuario')).id
-
-    createCita({
-      idPaciente: iduser,
-      especialidad,
-      fecha: horario.toString(),
-      turno,
-      idDoctor: 2055
-    })
+    servicioPrueba()
+    // createCita({
+    //   idPaciente: iduser,
+    //   especialidad,
+    //   fecha: horario.toString(),
+    //   turno,
+    //   idDoctor: 2055
+    // })
     // .then()
   }
 
