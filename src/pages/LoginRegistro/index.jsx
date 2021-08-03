@@ -5,6 +5,8 @@ import SendLogin from 'services/sendLogin'
 import SendRegistro from 'services/sendRegistro'
 import Loader from 'components/loader'
 import Errormodal from 'components/errormodal/errormodal'
+import pruebaRegistro from 'services/pruebaRegistro'
+
 export default function LoginRegistro({ }) {
   let history = useHistory();
   const [loginState, setLoginState] = useState(true)
@@ -40,7 +42,9 @@ export default function LoginRegistro({ }) {
     formData.set('tipoUsuario', 'paciente')
     if (validarForm(formData)) {
       setLoading(true)
-      SendRegistro({ formData })
+      pruebaRegistro ({ formData})
+
+      /*SendRegistro({ formData })
         .then(res => {
           setLoading(false)
           console.log(res)
@@ -50,7 +54,7 @@ export default function LoginRegistro({ }) {
             setError(true)
             setMessage(res)
           }
-        })
+        })*/  
     } else {
       console.log('jj')
     }
