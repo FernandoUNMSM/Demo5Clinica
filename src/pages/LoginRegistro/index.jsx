@@ -42,12 +42,10 @@ export default function LoginRegistro({ }) {
     setLoading(true)
     LoginBack({ formData })
       .then(res => {
-        console.log(res)
         setLoading(false)
         return (res.valid) ? history.push(res.path) : null
       })
   }
-
 
   const sendRegistro = (evt) => {
     evt.preventDefault()
@@ -55,19 +53,12 @@ export default function LoginRegistro({ }) {
     formData.set('tipoUsuario', 'paciente')
     if (validarForm(formData)) {
       setLoading(true)
-      pruebaRegistro ({ formData})
-
-      /*SendRegistro({ formData })
-        .then(res => {
-          setLoading(false)
-          console.log(res)
-          if(res === 'user created') {
-            return history.push('/ClinicaPaciente')
-          }else {
-            setError(true)
-            setMessage(res)
-          }
-        })*/  
+        const valid = pruebaRegistro({ formData })
+        if (valid) {
+          return history.push('/ClinicaPaciente')
+        }else {
+          setError(true)
+        }
     } else {
       console.log('jj')
     }

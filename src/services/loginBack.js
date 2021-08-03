@@ -22,7 +22,6 @@ const loginBack = async function ({formData}) {
         // Navigation.navigate takes the user to the screen named after the one
         // passed as parameter
         const currentUser = await Parse.User.currentAsync();
-        console.log(currentUser)
         let path = ""
         const nombre = currentUser.attributes.nombre;
         const apellido = currentUser.attributes.apellido;
@@ -34,7 +33,8 @@ const loginBack = async function ({formData}) {
             apellido,
             usuario,
             email,
-            tipoUsuario
+            tipoUsuario,
+            id: Object.keys(currentUser.attributes.ACL.permissionsById)[1]
         }
         
         sessionStorage.setItem('usuario', JSON.stringify(user))//nombre apellido ususario tipousuario
@@ -44,13 +44,11 @@ const loginBack = async function ({formData}) {
             path = '/ClinicaDoctor'
           }
           else if (tipoUsuario == 'paciente') {
-            console.log(tipoUsuario)
             path = '/ClinicaPaciente'
           }
           else if (tipoUsuario == 'administrador') {
             path = '/ClinicaAdministrador'
           }
-          console.log("shbsahdbsajdjasd")
 
         return {valid: true , path};
       })
