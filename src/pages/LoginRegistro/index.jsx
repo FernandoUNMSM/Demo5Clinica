@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './styles.css'
 import { Link, useHistory } from 'react-router-dom'
 import SendLogin from 'services/sendLogin'
+import LoginBack from 'services/loginBack'
 import SendRegistro from 'services/sendRegistro'
 import Loader from 'components/loader'
 import Errormodal from 'components/errormodal/errormodal'
@@ -35,6 +36,18 @@ export default function LoginRegistro({ }) {
         return (res.valid) ? history.push(res.path) : null
       })
   }
+  const loginBack = (evt) => {
+    evt.preventDefault()
+    const formData = new FormData(evt.target)
+    setLoading(true)
+    LoginBack({ formData })
+      .then(res => {
+        console.log(res)
+        setLoading(false)
+        return (res.valid) ? history.push(res.path) : null
+      })
+  }
+
 
   const sendRegistro = (evt) => {
     evt.preventDefault()
@@ -92,10 +105,10 @@ export default function LoginRegistro({ }) {
             (loginState)
               ?
               <div className="login">
-                <form action="POST" onSubmit={sendLogin}>
+                <form action="GET" onSubmit={loginBack}>
                   <div className="uc usuario">
                     {/* <label for="E-mail"><fa-icon [icon]="faUserAlt"></fa-icon> E-mail</label> */}
-                    <input type="text" name="email" placeholder="E-mail" autoComplete="off" required />
+                    <input type="text" name="username" id="" placeholder="username" required />
                   </div>
                   <div className="uc contrasena">
                     {/* <label for="Contraseña"><fa-icon [icon]="faLock"></fa-icon> Contraseña</label> */}

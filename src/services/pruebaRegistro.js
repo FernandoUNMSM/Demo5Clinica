@@ -8,7 +8,6 @@ Parse.initialize(
 export default async function pruebaRegistro({formData}) {
     const user = new Parse.User();
     user.set('usuario', formData.get("usuario"));
-    //user.set('email', 'A string');
     user.set('nombre', formData.get("name"));
     user.set('apellido', formData.get("apellido"));
     user.set('email', formData.get("email"));
