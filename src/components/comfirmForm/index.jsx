@@ -11,7 +11,7 @@ export default function Comfirm ({especialidad, horario, turno, doctor}){
       especialidad,
       fecha: horario.toString(),
       turno,
-      idDoctor: 2055
+      idDoctor: doctor
     })
     // createCita({
     //   idPaciente: iduser,
@@ -23,16 +23,11 @@ export default function Comfirm ({especialidad, horario, turno, doctor}){
     // .then()
   }
 
-  const obtener = () => {
-    crearDoctor()
-  }
-
   return (<>
     <p>{especialidad}</p>
     <p>{horario.toString()}</p>
     <p>{turno}</p>
     <p>{doctor}</p>
     <button onClick={enviarForm}>enviar</button>
-    <button onClick={obtener}>crearDoctor</button>
   </>)
 }

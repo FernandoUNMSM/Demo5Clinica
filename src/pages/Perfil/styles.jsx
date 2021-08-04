@@ -21,6 +21,7 @@ export const TablesContainer = styled.div`
     /* height: 40vh; */
     overflow: auto;
     width: 80%;
+    max-height: 100vh;
   }
   .scrollbar-container {
     width: 100%;

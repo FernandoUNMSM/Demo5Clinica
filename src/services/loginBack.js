@@ -9,8 +9,6 @@ Parse.initialize(
 
 
 const loginBack = async function ({ formData }) {
-
-
   const usernameValue = formData.get("username");
   const passwordValue = formData.get("password");
   return await Parse.User.logIn(usernameValue, passwordValue)

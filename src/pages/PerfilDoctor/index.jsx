@@ -4,6 +4,7 @@ import { Container, TablaContainer } from './styles'
 import Tabla from 'components/Tabla'
 import getCitas from 'services/getCitas.js'
 import terminarCita from 'services/terminarCita'
+import {obtenerCitasPorDoctor} from 'services/servicioPrueba'
 
 export default function PerfilDoctor({ }) {
   const [citas, setCitas] = useState([])
@@ -12,9 +13,11 @@ export default function PerfilDoctor({ }) {
     terminarCita({idCita})
   }
 
-  useEffect(()=> {
-    getCitas()
-      .then(setCitas)
+  useEffect(async ()=> {
+    const citas = await obtenerCitasPorDoctor()
+    setCitas(citas)
+    // getCitas()
+    //   .then(setCitas)
   },[])
 
   return (<>
@@ -36,8 +39,8 @@ export default function PerfilDoctor({ }) {
                 </thead>
                 <tbody>
                   {
-                    citas.map(cita =>
-                      <tr key={cita.idCita}>
+                    citas.map((cita, index) =>
+                      <tr key={index}>
                         <td>{cita.fecha}</td>
                         <td>{cita.turno}</td>
                         <td>{cita.paciente}</td>

@@ -20,18 +20,69 @@ export async function servicioPrueba(json) {
 }
 
 export async function obtenerCitas() {
+  const id = JSON.parse(sessionStorage.getItem('usuario')).id
   const query = new Parse.Query('citas');
   // You can also query by using a parameter of an object
   // query.equalTo('objectId', 'xKue915KBG');
   const results = await query.find();
-  const citas = []
+  const query2 = new Parse.Query('doctores');
+  let citas = []
   try {
     for (const object of results) {
       // Access the Parse Object attributes using the .GET method
       const res = object.get('where');
-      citas.push(res)
+
+      let user = await query2.find();
+
+      let uservalue = user.map(res => res.get('where'))
+      let doc = uservalue.filter(userv => userv.idDoctor == res.idDoctor)
+
+      citas.push({...res, doctor: doc[0].nombre})
     }
-    return citas;
+
+    let citasUsuario = citas.filter(cita => cita.idPaciente == id)
+    return citasUsuario;
+  } catch (error) {
+    console.error('Error while fetching MyCustomClassName', error);
+  }
+}
+
+export async function obtenerCitasPorDoctor() {
+  const id = JSON.parse(sessionStorage.getItem('usuario')).id
+  const query = new Parse.Query('citas');
+  // You can also query by using a parameter of an object
+  // query.equalTo('objectId', 'xKue915KBG');
+  const results = await query.find();
+  const query2 = new Parse.Query('doctores');
+  const User = new Parse.User();
+  const query3 = new Parse.Query(User);
+
+  let citas = []
+  try {
+    for (const object of results) {
+      // Access the Parse Object attributes using the .GET method
+      const res = object.get('where');
+
+      let docs = await query2.find();
+      let users = await query3.find();
+
+      let docsvalue = docs.map(res => res.get('where'))
+      let doc = docsvalue.filter(doc => doc.idDoctor == res.idDoctor)
+
+      let uservalue = users.map(res => {
+        const id = res.id;
+        const nombre = res.get('nombre');
+        const apellido = res.get('apellido');
+        return {id, nombre, apellido}
+      })
+      let user = uservalue.filter(user => user.id == res.idPaciente)
+      console.log(user)
+
+      citas.push({...res, idUsuario: doc[0].idUsuario, paciente: `${user[0].nombre + ' ' + user[0].apellido}`})
+    }
+    let citasUsuario = citas.filter(cita => cita.idUsuario == id)
+    // console.log(citasUsuario)
+    return citasUsuario;
   } catch (error) {
     console.error('Error while fetching MyCustomClassName', error);
   }

@@ -5,12 +5,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Tabla from 'components/Tabla'
 import getDoctores from "services/getDoctores";
+import {obtenerDoctoresBack} from "services/obtenerDoctoresBack";
 
 export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
   const [doctores, setDoctores] = useState([])
-  useEffect(()=> {
-    getDoctores({especialidad, turno})
-      .then(setDoctores)
+  useEffect(async ()=> {
+    const pacientes = await obtenerDoctoresBack({especialidad, turno})
+    setDoctores(pacientes)
+
   },[])
 
   const [check, setCheck] = useState(false);
@@ -59,7 +61,7 @@ export default function ChooseDoctor ({updateDoctor, especialidad, turno}){
               <tbody>
                 {
                   doctores.map((doctor, index) =>
-                    <tr key={doctor.idDoc}>
+                    <tr key={doctor.idDoctor} id={doctor.idDoctor}>
                       <td>{doctor.nombre}</td>
                       <td>{doctor.turno}</td>
                       {/* <td>
