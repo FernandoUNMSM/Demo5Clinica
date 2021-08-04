@@ -13,7 +13,7 @@ export default function LoginRegistro({ }) {
   const [loginState, setLoginState] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-	const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('')
 
   const toggleLogin = () => {
     setLoginState(true)
@@ -53,12 +53,14 @@ export default function LoginRegistro({ }) {
     formData.set('tipoUsuario', 'paciente')
     if (validarForm(formData)) {
       setLoading(true)
-        const valid = pruebaRegistro({ formData })
-        if (valid) {
-          return history.push('/ClinicaPaciente')
-        }else {
-          setError(true)
-        }
+      pruebaRegistro({ formData })
+        .then(res => {
+          if (res) {
+            return history.push('/ClinicaPaciente')
+          } else {
+            setError(true)
+          }
+        })
     } else {
       console.log('jj')
     }
@@ -81,8 +83,8 @@ export default function LoginRegistro({ }) {
     }
     {
       (error)
-      ? <Errormodal setError={setError} message={message} />
-      : null
+        ? <Errormodal setError={setError} message={message} />
+        : null
     }
     <div className="loginRegistroContainer">
       <div className="login-container">

@@ -1,15 +1,13 @@
 import Parse from 'parse/dist/parse.min.js';
-Parse.serverURL = 'https://parseapi.back4app.com'; 
+Parse.serverURL = 'https://parseapi.back4app.com';
 Parse.initialize(
-    'qMenrB82bZixVEvX439wvAx5pRZHIDIg43LvlqQL', 
+    'qMenrB82bZixVEvX439wvAx5pRZHIDIg43LvlqQL',
     '09rHQT162eNw4fLLUjoT2e7lvpabM8r885YvinpT'
 );
 
-export default async function pruebaRegistro({formData}) {
-    
+export default async function pruebaRegistro({ formData }) {
     const user = new Parse.User();
-    const query = new Parse.Query(user);
-    
+
     user.set('usuario', formData.get("dni"));
     user.set('nombre', formData.get("name"));
     user.set('apellido', formData.get("apellido"));
@@ -18,34 +16,29 @@ export default async function pruebaRegistro({formData}) {
     user.set('password', formData.get("password"));
     user.set('username', formData.get("email"));
 
-    try {
-        let userResult = await user.signUp();
-        console.log('User signed up', userResult);
+    return await user.signUp()
+        .then(async (loggedInUser) => {
+            const currentUser = await Parse.User.currentAsync();
 
-        const currentUser = await Parse.User.currentAsync();
-        console.log(currentUser)
-        let path = ""
-        
-        const nombre = currentUser.attributes.nombre;
-        const apellido = currentUser.attributes.apellido;
-        const usuario = currentUser.attributes.usuario;
-        const email = currentUser.attributes.email;
-        const tipoUsuario = currentUser.attributes.tipoUsuario;
-        const id = userResult.id;
-       
-        const user3 = {
-            nombre,
-            apellido,
-            usuario,
-            email,
-            tipoUsuario,
-            id}
-        
-        console.log(user3);
-        sessionStorage.setItem('usuario', JSON.stringify(user))
-        
-        return true;
-      } catch (error) {
-        console.error('Error while signing up user', error);
-      }
-  }
+            const nombre = currentUser.attributes.nombre;
+            const apellido = currentUser.attributes.apellido;
+            const usuario = currentUser.attributes.usuario;
+            const email = currentUser.attributes.email;
+            const tipoUsuario = currentUser.attributes.tipoUsuario;
+            const id = loggedInUser.id;
+
+            const user3 = {
+                nombre,
+                apellido,
+                usuario,
+                email,
+                tipoUsuario,
+                id
+            }
+            sessionStorage.setItem('usuario', JSON.stringify(user3))
+
+            console.log(user3);
+            return true
+        })
+
+}

@@ -7,6 +7,7 @@ Parse.initialize(
 );
 
 export async function servicioPrueba(json) {
+  console.log(json)
   const myNewObject = new Parse.Object('citas');
   myNewObject.set('where', json);
   try {

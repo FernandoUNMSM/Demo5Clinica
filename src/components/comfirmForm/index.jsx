@@ -1,6 +1,7 @@
 import React from 'react'
 import createCita from 'services/createCita'
 import {servicioPrueba} from 'services/servicioPrueba'
+import crearDoctor from 'services/crearDocotr'
 
 export default function Comfirm ({especialidad, horario, turno, doctor}){
   const enviarForm = () => {
@@ -22,11 +23,16 @@ export default function Comfirm ({especialidad, horario, turno, doctor}){
     // .then()
   }
 
+  const obtener = () => {
+    crearDoctor()
+  }
+
   return (<>
     <p>{especialidad}</p>
     <p>{horario.toString()}</p>
     <p>{turno}</p>
     <p>{doctor}</p>
     <button onClick={enviarForm}>enviar</button>
+    <button onClick={obtener}>crearDoctor</button>
   </>)
 }

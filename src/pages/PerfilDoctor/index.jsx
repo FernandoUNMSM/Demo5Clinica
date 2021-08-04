@@ -30,8 +30,8 @@ export default function PerfilDoctor({ }) {
                     <th>Fecha</th>
                     <th>Horario</th>
                     <th>Paciente</th>
-                    <th className="selecc">Perfil</th>
-                    <th>Concluir</th>
+                    {/* <th className="selecc">Perfil</th>
+                    <th>Concluir</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -41,12 +41,12 @@ export default function PerfilDoctor({ }) {
                         <td>{cita.fecha}</td>
                         <td>{cita.turno}</td>
                         <td>{cita.paciente}</td>
-                        <td>
+                        {/* <td>
                           <button>Ver Perfil</button>
                         </td>
                         <td>
                           <button onClick={() => concluirCita(cita.idCita)}>Concluir</button>
-                        </td>
+                        </td> */}
                       </tr>
                     )
                   }

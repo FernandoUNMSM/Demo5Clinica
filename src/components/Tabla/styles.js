@@ -10,6 +10,7 @@ export const TableContainer = styled.div`
     width: 100%;
     table-layout: fixed;
     min-width: 1000px;
+    max-height: 100vh;
   }
   th {
     font-size: 1.5em;

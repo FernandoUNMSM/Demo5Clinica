@@ -8,6 +8,7 @@ export const Container = styled.div`
     width: 100%;
     overflow: auto;
     height: fit-content;
+    height: 100vh;
   }
   `
 export const TablaContainer = styled.div`

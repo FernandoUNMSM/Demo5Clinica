@@ -15,11 +15,6 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
   const Especialidad = [
     { value: 'cardiologia', label: 'Cardiologia' },
     { value: 'traumatologia', label: 'Traumatologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
-    { value: 'oncologia', label: 'Oncologia' },
     { value: 'oncologia', label: 'Oncologia' }
   ]
   const turnos = [
@@ -41,7 +36,7 @@ export default function Formulario ({ especialidad, updateEspecialidad, horario,
               placeholder='Elige una especialidad'
               onChange={ (evt) => updateEspecialidad(evt)}
               styles={{
-                menuList: styles => ({ ...styles, height: '200px'}),
+                menuList: styles => ({ ...styles, maxheight: '200px'}),
               }}
             />
           </div>
